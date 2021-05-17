@@ -1,0 +1,13 @@
+{
+  "name": "upload-de-arquivo",
+  "version": "1.0.0",
+  "main": "sec/server.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

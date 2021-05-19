@@ -1,8 +1,6 @@
-import app from './app.js'
+const app = require('./app.js');
 
-app.listen(process.env.PORT || 8181, (erro) => {
-
-    if(erro) return console.log(`Erro: ${erro}`);
-    console.log(`Servidor iniciado`);
-
-});
+app.listen(8282, (error) => {
+    if(error) return console.log(`\n\n ${error} \n\n`);
+    console.log(`\nServidor iniciado\n`);
+})

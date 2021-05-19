@@ -1,7 +1,9 @@
-import express from 'express'
+const express = require('express');
+const router = require('./router.js');
+const path =  require('path');
 
-const app = express()
+const app = express();
+app.use(express.urlencoded({ extended: false }))
+app.use(router);
 
-
-
-export default app;
+module.exports = app; 

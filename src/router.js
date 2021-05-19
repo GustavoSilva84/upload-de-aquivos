@@ -1,13 +1,12 @@
 const express = require('express')
 const router = express.Router();
 const multer = require('multer');
-
 const fs = require('fs');
-const pastaDeDados = './dados';
 
-if (!fs.existsSync(dir)){
-    fs.mkdirSync(dir);
-}
+
+const pastaDeDados = './dados';
+if(!fs.existsSync(pastaDeDados)) fs.mkdirSync(pastaDeDados);
+
 
 const storage = multer.diskStorage({
 
@@ -16,7 +15,7 @@ const storage = multer.diskStorage({
     },
 
     filename: (req, file, cb) => {
-      cb(null, file.originalname + '')  
+      cb(null, file.originalname.toString())   
     } 
 
 })  

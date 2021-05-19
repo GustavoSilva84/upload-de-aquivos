@@ -3,18 +3,38 @@ const multer = require('multer');
 
 if(!fs.existsSync('./dados')) fs.mkdirSync('./dados');
 
-const storage = multer.diskStorage({
+module.exports = (multer({
 
-    destination: (req, file, cb) => {
-      cb(null, 'dados/')
-    },
+    storage: multer.diskStorage({
 
-    filename: (req, file, cb) => {
-      cb(null, file.originalname.toString())   
-    } 
+        destination: (req, file, cb) => {
+            cb(null, 'dados/')
+        },
+    
+        filename: (req, file, cb) => {
+            cb(null, file.originalname.toString())   
+        } 
 
-})  
+    }),
 
-const upload = multer({ storage });
+    fileFilter: (req, file, cb) => {
+        
+        const isAccepted = ['image/png', 'image/jpg', 'image/jpeg'].find(formatoAceito => formatoAceito == file.mimetype);
 
-module.exports = upload
+        if(isAccepted){
+            return cb(null, true);
+        }
+        
+        return cb(null, false);
+
+    }
+
+}))
+
+
+
+
+
+// const upload = multer({ storage });
+
+// module.exports = upload

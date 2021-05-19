@@ -5,5 +5,6 @@ const upload = require('./middleware/MiddlewareMulter')
  
 router.get('/', ControllerArquivo.Mostrar);
 router.post('/', upload.single('img'), ControllerArquivo.Criar); 
+router.get('/m', ControllerArquivo.Me)
  
 module.exports = router;

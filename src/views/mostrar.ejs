@@ -45,7 +45,7 @@
             const Dados = await fetch('/postagens');
             const dados = await Dados.json()
             
-            dados.forEach(dados => {
+            dados.forEach((dados, indice) => {
 
                 let container = document.querySelector('#container');
                 let div = document.createElement('div');
@@ -53,9 +53,9 @@
                 div.innerHTML = `
                 
                     <form onsubmit="deletar(event, '${dados.id}', '${dados.img}')">
-
                         <img src="${dados.img}"><br> 
                         <p> ${dados.msg} </p><br> 
+                        <a href="${dados.img}" download> Baixe </a>
                         <button type="submit"> Deletar </button>
 
                     </form>

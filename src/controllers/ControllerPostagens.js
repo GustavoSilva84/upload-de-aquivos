@@ -11,6 +11,7 @@ class ControllerPostagens {
             try {
 
                 await ModelPostagens.create({ msg: req.body.titulo, img: req.file.filename });
+                console.log(req.file)
                 return res.redirect('/posts');
 
             }catch(erro) {

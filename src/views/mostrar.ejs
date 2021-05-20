@@ -39,42 +39,33 @@
 
     <script>
 
-
-        async function e() {
+        async function buscar() {
 
             const Dados = await fetch('/postagens');
             const dados = await Dados.json()
             
             dados.forEach(dados => {
-   
-                console.log(dados)
 
                 let container = document.querySelector('#container');
                 let div = document.createElement('div');
-                let body = {
-                    id: dados.id,
-                    img: dados.img
-                }
-        
+
                 div.innerHTML = `
                 
-                    <form onsubmit="deletar(event, '${body.id}', '${body.img}')">
+                    <form onsubmit="deletar(event, '${dados.id}', '${dados.img}')">
 
                         <img src="${dados.img}"><br> 
                         <p> ${dados.msg} </p><br> 
-
                         <button type="submit"> Deletar </button>
 
                     </form>
                 
                 `
 
-                container.appendChild(div)
+                container.appendChild(div);
 
-            })
+            });
 
-        }
-        e();
+        }buscar();
 
         async function deletar(event, id, url) {
 
@@ -82,10 +73,11 @@
 
             let Dados = await fetch(`/postagens/${id}/${url}`, {
                 method: 'delete'
-            })
+            });
 
-            let d = await Dados.json();
-            alert(JSON.stringify(d))
+            let dados = await Dados.json();
+            alert(dados.msg);
+            buscar()
 
         }
 

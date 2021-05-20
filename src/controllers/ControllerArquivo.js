@@ -50,7 +50,7 @@ class ControllerArquivo {
 
     async Deletar(req, res) {
 
-        // try {
+        try {
 
             const { id, url } = req.params;
 
@@ -67,9 +67,9 @@ class ControllerArquivo {
 
             res.status(200).json({ msg: "post deletado" })
 
-        // }catch(erro) {
-        //     res.send({erro:'Erro ao deletar potagen'});
-        // }
+        }catch(erro) {
+            res.send({erro:'Erro ao deletar potagen'});
+        }
 
         }
     

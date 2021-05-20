@@ -12,7 +12,7 @@ module.exports = (multer({
         },
     
         filename: (req, file, cb) => {
-            cb(null, file.originalname.toString())   
+            cb(null,  `${Date.now()} - ${file.originalname.toString()}` )   
         } 
 
     }),

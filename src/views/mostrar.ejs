@@ -71,13 +71,20 @@
 
             event.preventDefault();
 
+            let container = document.querySelectorAll('#container > div');
+
             let Dados = await fetch(`/postagens/${id}/${url}`, {
                 method: 'delete'
             });
 
             let dados = await Dados.json();
+
+            container.forEach(div => {
+                div.innerHTML = ''
+            })
+            
+            buscar();
             alert(dados.msg);
-            buscar()
 
         }
 

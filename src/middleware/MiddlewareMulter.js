@@ -30,11 +30,3 @@ module.exports = (multer({
     }
 
 }))
-
-
-
-
-
-// const upload = multer({ storage });
-
-// module.exports = upload

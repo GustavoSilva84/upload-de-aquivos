@@ -1,5 +1,6 @@
 const path = require('path')
 const ModelPostagens = require('../model/ModelPostagens');
+const fs = require('fs')
 
 class ControllerArquivo {
 
@@ -43,25 +44,35 @@ class ControllerArquivo {
     }
 
     Postagens(req, res) {
+        console.log('\n\n\n' + path.resolve(__dirname, '..', '..', 'dados'));
         res.render('mostrar')
     }
 
     async Deletar(req, res) {
 
-        try {
+        // try {
 
-            res.send('deletou!!!!!!!!!!!!!!!!!!!!!')
-            // const id = req.parms.id
-            // console.log(id)
-            // res.deletado
+            const { id, url } = req.params;
 
-        }catch(erro) {
-            res.send('Erro ao deletar potagen');
+            const posts = await ModelPostagens.destroy({ where: { id: id } })
+
+            if(!posts) {
+                return res.status(404).json({ erro: "Post não encontrado" })
+            }
+
+            console.log('\n\n\n hjhjhj' + path.resolve(__dirname, '..', '..', 'dados', `${url}`));
+            fs.unlink(path.resolve(__dirname, '..', '..', 'dados', `${url}` ), () => {
+                console.log('DELETADO')
+            });
+
+            res.status(200).json({ msg: "post deletado" })
+
+        // }catch(erro) {
+        //     res.send({erro:'Erro ao deletar potagen'});
+        // }
+
         }
-
-    }
     
 }
-
  
 module.exports = new ControllerArquivo; 

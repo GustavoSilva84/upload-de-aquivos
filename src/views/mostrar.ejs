@@ -51,16 +51,17 @@
 
                 let container = document.querySelector('#container');
                 let div = document.createElement('div');
-
+                let body = {
+                    id: dados.id,
+                    img: dados.img
+                }
+        
                 div.innerHTML = `
                 
-                    <form onsubmit="deletar(event)">
+                    <form onsubmit="deletar(event, '${body.id}', '${body.img}')">
 
                         <img src="${dados.img}"><br> 
                         <p> ${dados.msg} </p><br> 
-
-                        <input type="hidden" name="img" value="${dados.img}">
-                        <input type="hidden" name="msg" value="${dados.msg}">
 
                         <button type="submit"> Deletar </button>
 
@@ -75,9 +76,16 @@
         }
         e();
 
-        async function deletar(event) {
+        async function deletar(event, id, url) {
 
-            event.
+            event.preventDefault();
+
+            let Dados = await fetch(`/postagens/${id}/${url}`, {
+                method: 'delete'
+            })
+
+            let d = await Dados.json();
+            alert(JSON.stringify(d))
 
         }
 

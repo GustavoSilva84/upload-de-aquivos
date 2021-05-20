@@ -8,6 +8,6 @@ router.get('/posts', ControllerArquivo.Postagens);
 
 router.post('/postagens', upload.single('img'), ControllerArquivo.Criar); 
 router.get('/postagens', ControllerArquivo.Mostrar);
-router.delete('/postagens/:id', ControllerArquivo.Deletar);
+router.delete('/postagens/:id/:url', ControllerArquivo.Deletar);
 
 module.exports = router;

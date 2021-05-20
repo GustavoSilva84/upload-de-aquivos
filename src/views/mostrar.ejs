@@ -5,14 +5,83 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #container > div > form {
+            width: fit-content;
+            background-color: rgb(209, 209, 209);
+            margin: 20px;
+            padding: 10px;
+        }
+
+        #container > div > form > img {
+            width: 400px;
+        }
+
+        #container > div > form > p {
+            width: 400px;
+            word-break: break-all;
+        }
+
+    </style>
+
 </head>
 <body>
     
-    <% dados.forEach(dados => { %>
-        <img width="600" src="<%- dados.img %>"><br>
-        
-    <% }) %>
+    <div id="container"></div>
 
+    <script>
+
+
+        async function e() {
+
+            const Dados = await fetch('/postagens');
+            const dados = await Dados.json()
+            
+            dados.forEach(dados => {
+   
+                console.log(dados)
+
+                let container = document.querySelector('#container');
+                let div = document.createElement('div');
+
+                div.innerHTML = `
+                
+                    <form onsubmit="deletar(event)">
+
+                        <img src="${dados.img}"><br> 
+                        <p> ${dados.msg} </p><br> 
+
+                        <input type="hidden" name="img" value="${dados.img}">
+                        <input type="hidden" name="msg" value="${dados.msg}">
+
+                        <button type="submit"> Deletar </button>
+
+                    </form>
+                
+                `
+
+                container.appendChild(div)
+
+            })
+
+        }
+        e();
+
+        async function deletar(event) {
+
+            event.
+
+        }
+
+    </script>
 
 </body>
 </html>

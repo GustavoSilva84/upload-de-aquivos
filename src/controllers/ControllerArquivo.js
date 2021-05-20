@@ -3,50 +3,64 @@ const ModelPostagens = require('../model/ModelPostagens');
 
 class ControllerArquivo {
 
-    Mostrar(req, res) {   
-        
-        res.render('index');
+    Form(req, res) {   
+        res.render('form');
     } 
 
-    Criar(req, res) {
-
-        console.log(req.file)
+    async Criar(req, res) {
 
         if(req.file) {
 
-            ModelPostagens.create({
-                msg: req.body.titulo,
-                img: req.file.filename
-            }).then(() => {
-                res.send('criado com sucesso')
-                
-            })
+            try {
 
-            return
+                const dados = {
+                    msg: req.body.titulo,
+                    img: req.file.filename
+                }
 
-            // let d = path.resolve(__dirname, '../', '../', './dados', `/${ req.file.filename }` )
-            
-            // res.send(`<img width="200px" src="${d}">`)
-            // return
+                await ModelPostagens.create(dados);
+                res.send('criado com sucesso');
 
+            }catch(erro) {
+                res.send('Erro ao salvar a imagem');
+            }
+        
         }
-
-        res.send('nxbwb')
         
     }
 
-    Me(req, res) {
+    async Mostrar(req, res) {
 
-        ModelPostagens.findAll().then((dados) => {
-            res.render('mostrar', {
-                dados: dados
-            })
-        })
+        try {
+
+            const dados = await ModelPostagens.findAll();
+            res.status(200).json(dados)
+
+        }catch(erro) {
+            res.send('Erro ao carregar potagens');
+        }
+
+    }
+
+    Postagens(req, res) {
+        res.render('mostrar')
+    }
+
+    async Deletar(req, res) {
+
+        try {
+
+            res.send('deletou!!!!!!!!!!!!!!!!!!!!!')
+            // const id = req.parms.id
+            // console.log(id)
+            // res.deletado
+
+        }catch(erro) {
+            res.send('Erro ao deletar potagen');
+        }
 
     }
     
-
-
 }
 
  

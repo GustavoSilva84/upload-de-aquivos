@@ -17,7 +17,13 @@ app.use(router);
 
 app.use((req, res, next) => {
 
-    res.send('404')
+    res.send(`
+        <h1> Pagina não encontrada 404 </h1>
+        <ul>
+            <li> <a href="/form"> Form </a> </li>
+            <li> <a href="/posts"> Pots </a> </li>
+        </ul>
+    `)
 
 })
 

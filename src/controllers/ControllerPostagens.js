@@ -48,9 +48,11 @@ class ControllerPostagens {
             const { id, url } = req.params;
             const posts = await ModelPostagens.destroy({ where: { id: id } });
             
-            if(!posts) return res.status(404).json({ erro: "Post não encontrado  0 00" });
+            if(!posts) return res.status(404).json({ erro: "Post não encontrado" });
 
-            fs.unlink(path.resolve(__dirname, '..', '..', 'dados', `${url}`));
+            fs.unlink(path.resolve(__dirname, '..', '..', 'dados', `${url}`), () => {
+                console.log('Deletado')
+            });
             res.status(200).json({ msg: "post deletado" });
 
         }catch(erro) {

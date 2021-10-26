@@ -15,7 +15,7 @@ module.exports = (multer({
             cb(null,  `${Date.now()} - ${file.originalname.toString()}` )   
         }
 
-    }),
+    })
 
 
 }))
